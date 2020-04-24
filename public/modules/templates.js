@@ -100,7 +100,7 @@ export const stateContent = {
   "disabled": `<h2>Private Network is off</h2><h3>Enable to mask your IP and location.</h3>`,
   "disabling": `<h2>Disconnecting...</h2>`,
   "connecting": `<h2>Connecting...</h2><h3>You will be protected shortly.</h3>`,
-  "enabled": `<h2>Private Network is off</h2><h3>Enable to mask your IP and location.</h3>`
+  "enabled": `<h2>Private Network is on</h2><h3>Your IP and location are protected.</h3>`
 };
 
 export const upgradeTemplate = takeoverTemplate("upgradePrompt", upgradeContent);

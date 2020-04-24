@@ -2,7 +2,7 @@
 body {
   background: linear-gradient(#321C64, rgb(37, 22, 71));
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px 840px 1fr;
   height: 100vh;
   margin: 0;
   overflow: hidden;
@@ -104,4 +104,15 @@ button#noIncludeTriggerButton {
   color: #fff !important;
   display: block;
   margin: 0 0 16px;
+}
+
+#noIncludeNotesSection {
+  margin-top: 104px;
+  color: #fff;
+  margin-right: 24px;
+}
+
+#noIncludeNotes {
+  margin-top: 24px;
+  line-height: 24px;
 }

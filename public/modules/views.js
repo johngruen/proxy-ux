@@ -12,6 +12,8 @@ import {
 const views = [
   {
     viewName: "Authenticate",
+    notes: `Some general todos here like finalizing illustrations, showing the browserAction states etc.<br><br>
+    This screen shows the default front door of the extension. Normally it would send users to do the FxA auth dance, but here we skip that and go straight to onboarding.`,
     state: "hidden",
     template: authTemplate,
     registerHandlers: () => {
@@ -86,10 +88,6 @@ const views = [
     state: "disabled",
     stateContent: stateContent["disabled"],
     viewName: "Disabled",
-    template: messageTemplate(
-      "good",
-      "argle bargle lorem ipsum blah blah blah blah"
-    ),
   },
   {
     globeFrames: [0, 15],
@@ -112,6 +110,8 @@ const views = [
     state: "hidden",
     template: settingsTemplate,
     viewName: "Settings",
+    notes:
+      "This one needs a bunch of cleanup, still...mostly CSS + want to add illos for the links",
   },
   {
     state: "hidden",
@@ -122,6 +122,43 @@ const views = [
     state: "hidden",
     template: clientTemplate,
     viewName: "Max Clients",
+  },
+  {
+    globeFrames: [75, 90],
+    showSettingsButton: true,
+    state: "disabled",
+    stateContent: stateContent["disabled"],
+    viewName: "Disabled - Warning",
+    template: messageTemplate(
+      "warning",
+      "your proxy exploded, please turn it on again to restart."
+    ),
+    notes:
+      "warning messages should generally dismiss when the user re-enables the proxy",
+  },
+  {
+    globeFrames: [15, 30],
+    showSettingsButton: true,
+    state: "enabled",
+    stateContent: stateContent["enabled"],
+    viewName: "Enabled - Info",
+    template: messageTemplate(
+      "info",
+      "We're going to be conducting routine maintenance at 1:30AM CET. You might have trouble connecting for a bit."
+    ),
+    notes: "need to add a dismiss button to these types of messages.",
+  },
+  {
+    globeFrames: [15, 30],
+    showSettingsButton: true,
+    state: "enabled",
+    stateContent: stateContent["enabled"],
+    viewName: "Enabled - Good",
+    template: messageTemplate(
+      "good",
+      `You've been using the proxy for <strong>three months straight</strong>! Thank you for your support ;)`
+    ),
+    notes:  "need to add a dismiss button to these types of messages.",
   },
 ];
 

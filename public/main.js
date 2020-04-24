@@ -2,6 +2,8 @@
 const stateEl = document.querySelector("#state");
 const contentEl = document.querySelector("#content");
 const utilsEl = document.querySelector("#utils");
+const notesSectionEl = document.querySelector("#noIncludeNotesSection");
+const notesEl = document.querySelector("#noIncludeNotes");
 
 const stateContentEl = document.querySelector("#stateContent");
 const stateButtonEl = document.querySelector("#stateButton");
@@ -46,6 +48,11 @@ window.setupView = (name) => {
     animateGlobe(currentView.globeFrames);
   }
 
+  if(typeof currentView.notes !== "undefined") {
+    notesSectionEl.removeAttribute("hidden");
+    notesEl.innerHTML = currentView.notes;
+  } else notesSectionEl.setAttribute("hidden","");
+
   if (currentView.viewName === "Enabled") {
     showRings(true);
     animateRings();
@@ -81,7 +88,7 @@ stateButtonEl.addEventListener("click", () => {
 
 
 // init
-setupView("Disabled");
+setupView("Loading");
 
 // create utility buttons for navigating states
 views.forEach((view) => {
