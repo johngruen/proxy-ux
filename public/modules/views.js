@@ -51,7 +51,7 @@ const views = [
           onboardingCardEls[onboardingIndex].removeAttribute("hidden");
         }
 
-        if (onboardingIndex === onboardingLength - 2) {
+        if (onboardingIndex === onboardingLength - 1) {
           onboardingNextButtonEl.setAttribute("hidden", "");
           onboardingDoneButtonEl.removeAttribute("hidden");
         }
