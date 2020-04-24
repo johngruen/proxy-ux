@@ -13,6 +13,7 @@
     "nodemon": "^2.0.3"
   },
   "scripts": {
+    "start": "node ./index.js",
     "dev": "nodemon ./index.js",
     "ui": "browser-sync start --proxy='localhost:8000' --files='**/*.css, **/*.pug, **/*.js' --ignore=node_modules --port=6006 --no-open --serveStatic='public'"
   },
