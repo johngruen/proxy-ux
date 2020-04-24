@@ -1,0 +1,652 @@
+* {
+  font-family: Metropolis, sans-serif;
+}
+
+:root {
+  --heading-font-size: 15px;
+  --footer-font-size: 15px;
+  --body-font-size: 15px;
+  --grid-padding: 8px;
+
+  --in-content-selected-text: #fff;
+  --in-content-button-background: var(--grey-90-a10);
+  --in-content-button-background-hover: var(--grey-90-a20);
+  --in-content-button-background-active: var(--grey-90-a30);
+  --in-content-primary-button-background: var(--blue-60);
+  --in-content-primary-button-background-hover: var(--blue-70);
+  --in-content-primary-button-background-active: var(--blue-80);
+
+  --blue-40: #45a1ff;
+  --blue-40-a10: rgb(69, 161, 255, 0.1);
+  --blue-50: #0a84ff;
+  --blue-50-a30: rgba(10, 132, 255, 0.3);
+  --blue-60: #0060df;
+  --blue-70: #003eaa;
+  --blue-80: #002275;
+  --grey-20: #ededf0;
+  --grey-30: #d7d7db;
+  --grey-40: #b1b1b3;
+  --grey-50: #737373;
+  --grey-60: #4a4a4f;
+  --grey-90: #0c0c0d;
+  --grey-90-a10: rgba(12, 12, 13, 0.1);
+  --grey-90-a20: rgba(12, 12, 13, 0.2);
+  --grey-90-a30: rgba(12, 12, 13, 0.3);
+  --grey-90-a50: rgba(12, 12, 13, 0.5);
+  --grey-90-a60: rgba(12, 12, 13, 0.6);
+  --ink-90: #1d1133;
+  --black: #0c0c0d;
+  --grey-10: #f9f9fa;
+  --error: #ffbdc5;
+  --good: #b3ffe3;
+
+  --link-link: var(--blue-50);
+  --link-hover: var(--blue-60);
+  --link-active: var(--blue-70);
+  /* Make title centered */
+  --center-offset: -32px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.panel {
+  background: var(--grey-10);
+  color: var(--black);
+  font-size: var(--body-font-size);
+  inline-size: 100%;
+  line-height: 22px;
+  overflow-inline: hidden;
+  border-radius: 6px;
+}
+
+/* styles applied to the main header area of the panel */
+.main-header {
+  block-size: 44px;
+  font-weight: bold;
+  display: flex;
+  position: relative;
+  margin: 0 var(--grid-padding);
+}
+
+.main-header__button {
+  position: absolute;
+  padding: 8px;
+}
+
+.main-header__title {
+  font-size: var(--heading-font-size);
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  font-weight: 500;
+}
+
+.main-header__button,
+.takeover__close-button {
+  --button-background: transparent;
+  position: absolute;
+  box-sizing: content-box;
+  block-size: 16px;
+  inline-size: 16px;
+  flex: 0 0 16px;
+  min-height: auto;
+  align-self: center;
+  display: block;
+  border: none;
+  padding: 4px;
+  border-radius: 2px;
+}
+
+.main-header__button:hover,
+.takeover__close-button:hover {
+  --button-background: var(--grey-20);
+}
+
+.main-header__button#settingsButton {
+  right: 0;
+  background: url(images/i-settings32.svg) 50% / 30px no-repeat;
+}
+
+.main-header__button#backButton {
+  background: var(--button-background) url(images/arrow-left.svg) 50% / 16px
+    no-repeat;
+  margin-inline-end: var(--center-offset);
+}
+
+a:link {
+  color: var(--link-link);
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+a:active {
+  color: var(--link-active);
+}
+
+/* there are two key areas of the app
+ * the state area, and the content area
+ * the state area is the main UI for controlling
+ * the proxy, while the content area is for
+ * everything else (messaging, settings, onboarding etc) */
+
+#state,
+.takeover {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 316px;
+  margin: 0 var(--grid-padding) var(--grid-padding);
+  overflow: hidden;
+  position: relative;
+  transition: background-color 250ms ease-in-out;
+  padding: var(--grid-padding);
+}
+
+/* State styles */
+
+#state {
+  justify-content: center;
+}
+
+#stateIcon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+#stateButton {
+  width: 60px;
+  height: 32px;
+  border-radius: 16px;
+  display: block;
+  position: relative;
+  transition: opacity 250ms ease-in-out;
+  margin-top: 20px;
+}
+
+#stateButton::before {
+  background-color: #fff;
+  block-size: 24px;
+  border-radius: 12px;
+  content: "";
+  inline-size: 24px;
+  left: 4px;
+  position: absolute;
+  top: 4px;
+  transition: transform 125ms ease-in-out;
+}
+
+#stateButton::-moz-focus-inner {
+  /* Bug https://github.com/mozilla/secure-proxy/issues/257 */
+  border: 0;
+}
+
+[data-state="connecting"] #stateButton::before,
+[data-state="enabled"] #stateButton::before {
+  transform: translateX(28px);
+}
+
+[data-state="login"] #stateButton {
+}
+
+[data-state="connecting"] #stateButton {
+  background: #3fe1b0;
+  opacity: 0.5;
+}
+
+[data-state="enabled"] #stateButton {
+  background: #3fe1b0;
+}
+
+[data-state="disabled"] #stateButton {
+  background-color: rgba(12, 12, 13, 0.4);
+}
+
+[data-state="disabling"] #stateButton {
+  background: rgba(12, 12, 13, 0.2);
+}
+
+#stateAnimation {
+  position: absolute;
+  top: -141px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#stateContent {
+  margin-top: 24px;
+  height: 64px;
+}
+
+#stateContent h2 {
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 400;
+  margin: 0 0 4px;
+  text-align: center;
+  color: rgba(12, 12, 13, 0.8);
+}
+
+#stateContent h3 {
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  font-weight: 400;
+  color: rgba(12, 12, 13, 0.6);
+  margin: 0;
+}
+
+#stateContent h2,
+#stateContent h3 {
+  transition: color 125ms;
+}
+
+[data-state="enabled"] #stateContent h2 {
+  color: white;
+}
+
+[data-state="enabled"] #stateContent h3 {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-state="hidden"]#state {
+  display: none;
+}
+
+[data-state="login"]#state {
+}
+
+[data-state="disabled"]#state {
+}
+
+[data-state="connecting"]#state {
+}
+
+[data-state="enabled"]#state {
+  background-color: #321c64;
+  color: white;
+}
+
+[data-state="enabled"] .enabled-circle {
+  width: 80px;
+  height: 80px;
+  box-shadow: 0px 0px 1px #00c8d7;
+  left: 120px;
+  top: 60px;
+  border-radius: 100%;
+  position: absolute;
+  animation: circle-effect;
+  animation-iteration-count: infinite;
+  animation-duration: 4s;
+  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+/* Content Styles */
+
+#onboarding .card {
+  display: contents;
+}
+
+.takeover__close-button {
+  background: var(--button-background) url("./images/close.svg") 50% / 16px
+    no-repeat;
+  background-size: 12px 12px;
+  top: var(--grid-padding);
+  right: var(--grid-padding);
+}
+
+.takeover {
+  padding: calc(2 * var(--grid-padding));
+}
+
+.takeover--inverse {
+  background-color: #321c64;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.takeover--warning {
+  border: 2px solid var(--error);
+}
+
+.takeover--center {
+  justify-content: center;
+}
+
+.takeover--betweeen {
+  justify-content: space-between;
+}
+
+.takeover__loading-icon {
+  animation: fade alternate-reverse 2000ms ease-in-out infinite;
+  height: 80px;
+  width: 80px;
+  background: url("./images/icon.svg") center center;
+  background-size: 80px 80px;
+}
+
+.takeover__icon {
+  flex: 1;
+}
+
+.takeover--center .takeover__icon {
+  flex: 0 0 80px;
+}
+
+#auth .takeover__icon,
+#upgradePrompt .takeover__icon,
+#clientPrompt .takeover__icon {
+  height: 80px;
+  width: 80px;
+  background: url("./images/icon.svg") center center no-repeat;
+  background-size: 80px 80px;
+  margin-bottom: 24px;
+}
+
+.takeover__content {
+  text-align: center;
+}
+
+.takeover__content p {
+  margin: 0 0 16px;
+}
+
+.takeover h2 {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 24px 0 12px;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+
+
+button {
+  -moz-appearance: none;
+  min-height: 32px;
+  color: inherit !important;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: var(--in-content-button-background);
+  font-weight: 400;
+  padding: 0 8px;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+#content button:not(#onboardingCloseButton) {
+  width: 100%;
+}
+
+button.primary {
+  color: var(--in-content-selected-text);
+}
+
+button[autofocus],
+button.primary {
+  background-color: var(--in-content-primary-button-background);
+  color: var(--in-content-selected-text) !important;
+}
+
+button[autofocus]:enabled:hover,
+button.primary:enabled:hover {
+  background-color: var(--in-content-primary-button-background-hover);
+}
+
+button[autofocus]:enabled:hover:active,
+button.primary:enabled:hover:active {
+  background-color: var(--in-content-primary-button-background-active);
+}
+
+.message {
+  margin: 0 0 var(--grid-padding);
+  padding: var(--grid-padding);
+  border-radius: 4px;
+  margin: 0 var(--grid-padding) var(--grid-padding);
+  padding-inline-start: 32px;
+  position: relative;
+}
+
+.message::before {
+  position: absolute;
+  inset-block-start: calc(1.4 * var(--grid-padding));
+  content: "";
+  display: inline-block;
+  block-size: 16px;
+  inline-size: 16px;
+  margin-inline-start: -22px;
+}
+
+.message--warning {
+  background-color: var(--error);
+}
+
+.message--info {
+  background-color: var(--grey-20)
+}
+
+.message--good {
+  background-color: var(--good);
+}
+
+.message--warning::before {
+  background: url("./images/i-warning16.svg");
+}
+
+.message--info::before {
+  background: url("./images/i-info16.svg");
+}
+
+.message--good::before {
+  background: url("./images/i-good16.svg");
+}
+
+
+
+#content .sub {
+  font-weight: normal;
+  color: var(--grey-90-a60);
+  line-height: 17px;
+  font-size: 13px;
+  margin: 0px;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+#content .subMain {
+  min-height: 60px;
+  margin-inline-start: var(--grid-padding);
+  margin-inline-end: var(--grid-padding);
+}
+
+#onboardingCloseButton {
+  margin: 0;
+  margin-left: auto;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Settings Menu */
+
+.settingsMenu {
+  padding: 0;
+}
+
+.settingsMenu a {
+  display: flex;
+  width: 100%;
+  color: black;
+  text-decoration: none;
+  padding-block-start: 13px;
+  padding-block-end: 13px;
+  padding-inline-start: var(--grid-padding);
+  padding-inline-end: var(--grid-padding);
+  list-style: none;
+}
+
+.settingsMenu span {
+  display: flex;
+  color: black;
+  text-decoration: none;
+  padding-block-start: 4px;
+  padding-block-end: 4px;
+  padding-inline-start: var(--grid-padding);
+  padding-inline-end: var(--grid-padding);
+  list-style: none;
+}
+
+.settingsMenu .sub {
+  padding-block-start: 0px;
+}
+
+.settingsMenu .toggleSettings {
+  margin-inline-end: var(--grid-padding);
+}
+
+.settingsMenu a:hover {
+  background: var(--grey-20);
+}
+
+.settingsMenu img {
+  border-radius: 200%;
+  align-self: center;
+  block-size: 32px;
+  inline-size: 32px;
+}
+
+.settingsMenu .manage {
+  /* padding-block-start: 6px;
+  padding-block-end: 8px; */
+}
+
+.settingsMenu #manageAccount {
+  block-size: 50px;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--grid-padding);
+  padding-inline-end: 8px;
+}
+
+.settingsMenu .details {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  line-height: 20px;
+  font-size: 15px;
+}
+
+.settingsMenu strong {
+  padding-inline-start: var(--grid-padding);
+}
+
+.settingsMenu ul {
+  width: 100%;
+}
+
+.settingsMenu > li {
+  border-block-end: 1px solid #e4e4e4;
+  padding-block-start: 9px;
+  padding-block-end: 9px;
+}
+
+.settingsMenu li {
+  display: flex;
+  list-style: none;
+}
+
+.settingsMenu #email {
+  max-inline-size: 270px;
+  inline-size: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+footer {
+  font-size: var(--footer-font-size);
+  padding-inline-start: var(--grid-padding);
+  padding-inline-end: var(--grid-padding);
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  border-block-start: 1px solid #e4e4e4;
+  background: #f9f9fb;
+  display: flex;
+}
+
+.linkRow {
+  padding: 10px var(--grid-padding);
+  border-block-start: 1px solid #e4e4e4;
+  display: flex;
+}
+
+#poweredBy {
+  white-space: pre;
+}
+
+#cloudflare {
+  color: var(--link-link);
+}
+
+#cloudflare:link {
+  text-decoration: none;
+}
+
+#cloudflare:visited {
+  color: var(--link-link);
+}
+
+#settingsLink {
+  color: var(--link-link);
+}
+
+#settingsLink:link {
+  text-decoration: none;
+}
+
+#settingsLink:visited {
+  color: var(--link-link);
+}
+
+.link {
+  cursor: pointer;
+}
+
+/* TK */
+
+.type {
+  color: white;
+  background: #321c64;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 18px;
+  /* identical to box height, or 164% */
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 0 8px;
+}

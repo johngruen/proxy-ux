@@ -2,15 +2,19 @@
   "name": "proxy-ux",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
+    "express": "^4.17.1",
     "lottie-web": "^5.6.8",
-    "pug": "^2.0.4",
-    "server": "^1.0.27"
+    "pug": "^2.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "nodemon": "^2.0.3"
+  },
   "scripts": {
-    "start": "node server.js"
+    "dev": "nodemon ./index.js",
+    "ui": "browser-sync start --proxy='localhost:8000' --files='**/*.css, **/*.pug, **/*.js' --ignore=node_modules --port=6006 --no-open --serveStatic='public'"
   },
   "author": "",
   "license": "ISC"
