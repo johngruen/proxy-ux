@@ -39,6 +39,12 @@ const authContent = `
     <button class="primary" id="authButton">Continue</button>
   <div>`;
 
+  const subscribeContent = `
+  <div class="takeover__icon"></div>
+  <div class="takeover__content">
+    <p>Please subscribe to use Firefox Private Network</p>
+    <button class="primary" id="authButton">Continue</button>
+  <div>`;
 
 const upgradeContent = `
   <div class="takeover__icon"></div>
@@ -76,8 +82,8 @@ export const settingsTemplate = `<ul class="settingsMenu">
     </li>
     <li>
         <ul>
-            <li><a class="link" id="privacyPolicy" href="#">Privacy Policy</a></li>
-            <li><a class="link" id="termsAndConditions" href="#">Leave Feedback</a></li>
+            <li><a class="link" id="privacyPolicy" href="#">Terms of Service</a></li>
+            <li><a class="link" id="termsAndConditions" href="#">Privacy Notice</a></li>
         </ul>
     </li>
 </ul>
@@ -87,7 +93,7 @@ export const settingsTemplate = `<ul class="settingsMenu">
 </footer>`;
 
 export const messageTemplate = (type, content) => {
-  return `<div class="message message--${type}">${content}</div>`;
+  return `<div class="message message--${type}"><span>${content}</span><div class="dismiss"></div></div>`;
 };
 
 export const onboardingTemplate = takeoverTemplate("onboarding", onboardingContent)
@@ -95,6 +101,8 @@ export const onboardingTemplate = takeoverTemplate("onboarding", onboardingConte
 export const loadingTemplate = takeoverTemplate("loading", loadingContent, "inverse", "center");
 
 export const authTemplate = takeoverTemplate("auth", authContent);
+
+export const subscribeTemplate = takeoverTemplate("auth", subscribeContent);
 
 export const stateContent = {
   "disabled": `<h2>Private Network is off</h2><h3>Enable to mask your IP and location.</h3>`,

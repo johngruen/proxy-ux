@@ -7,6 +7,7 @@ import {
   upgradeTemplate,
   clientTemplate,
   stateContent,
+  subscribeTemplate
 } from "./templates.js";
 
 const views = [
@@ -110,13 +111,16 @@ const views = [
     state: "hidden",
     template: settingsTemplate,
     viewName: "Settings",
-    notes:
-      "This one needs a bunch of cleanup, still...mostly CSS + want to add illos for the links",
   },
   {
     state: "hidden",
     template: upgradeTemplate,
     viewName: "Force Upgrade",
+  },
+  {
+    state: "hidden",
+    template: subscribeTemplate,
+    viewName: "Force Subscribe",
   },
   {
     state: "hidden",
@@ -158,7 +162,7 @@ const views = [
       "good",
       `You've been using the proxy for <strong>three months straight</strong>! Thank you for your support ;)`
     ),
-    notes:  "need to add a dismiss button to these types of messages.",
+    notes: "need to add a dismiss button to these types of messages.",
   },
 ];
 

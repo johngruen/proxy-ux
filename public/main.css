@@ -7,7 +7,6 @@
   --footer-font-size: 15px;
   --body-font-size: 15px;
   --grid-padding: 8px;
-
   --in-content-selected-text: #fff;
   --in-content-button-background: var(--grey-90-a10);
   --in-content-button-background-hover: var(--grey-90-a20);
@@ -15,7 +14,6 @@
   --in-content-primary-button-background: var(--blue-60);
   --in-content-primary-button-background-hover: var(--blue-70);
   --in-content-primary-button-background-active: var(--blue-80);
-
   --blue-40: #45a1ff;
   --blue-40-a10: rgb(69, 161, 255, 0.1);
   --blue-50: #0a84ff;
@@ -39,10 +37,10 @@
   --grey-10: #f9f9fa;
   --error: #ffbdc5;
   --good: #b3ffe3;
-
   --link-link: var(--blue-50);
   --link-hover: var(--blue-60);
   --link-active: var(--blue-70);
+
   /* Make title centered */
   --center-offset: -32px;
 }
@@ -91,6 +89,7 @@
 .main-header__button,
 .takeover__close-button {
   --button-background: transparent;
+
   position: absolute;
   box-sizing: content-box;
   block-size: 16px;
@@ -104,8 +103,7 @@
   border-radius: 2px;
 }
 
-.main-header__button:hover,
-.takeover__close-button:hover {
+.main-header__button:hover {
   --button-background: var(--grey-20);
 }
 
@@ -115,9 +113,25 @@
 }
 
 .main-header__button#backButton {
-  background: var(--button-background) url(images/arrow-left.svg) 50% / 16px
+  background:
+    var(--button-background) url(images/arrow-left.svg) 50% / 16px
     no-repeat;
   margin-inline-end: var(--center-offset);
+}
+
+.type {
+  color: white;
+  background: #321c64;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 0 8px;
 }
 
 a:link {
@@ -144,15 +158,15 @@ a:active {
   align-items: center;
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.1);
+  box-shadow: 0 1px 4px rgba(12, 12, 13, 0.1);
   display: flex;
   flex-direction: column;
   height: 316px;
   margin: 0 var(--grid-padding) var(--grid-padding);
   overflow: hidden;
+  padding: var(--grid-padding);
   position: relative;
   transition: background-color 250ms ease-in-out;
-  padding: var(--grid-padding);
 }
 
 /* State styles */
@@ -199,9 +213,6 @@ a:active {
   transform: translateX(28px);
 }
 
-[data-state="login"] #stateButton {
-}
-
 [data-state="connecting"] #stateButton {
   background: #3fe1b0;
   opacity: 0.5;
@@ -220,11 +231,11 @@ a:active {
 }
 
 #stateAnimation {
-  position: absolute;
-  top: -141px;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: -141px;
 }
 
 #stateContent {
@@ -233,21 +244,21 @@ a:active {
 }
 
 #stateContent h2 {
+  color: rgba(12, 12, 13, 0.8);
   font-size: 22px;
-  line-height: 32px;
   font-weight: 400;
+  line-height: 32px;
   margin: 0 0 4px;
   text-align: center;
-  color: rgba(12, 12, 13, 0.8);
 }
 
 #stateContent h3 {
-  font-size: 15px;
-  line-height: 22px;
-  text-align: center;
-  font-weight: 400;
   color: rgba(12, 12, 13, 0.6);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22px;
   margin: 0;
+  text-align: center;
 }
 
 #stateContent h2,
@@ -267,32 +278,9 @@ a:active {
   display: none;
 }
 
-[data-state="login"]#state {
-}
-
-[data-state="disabled"]#state {
-}
-
-[data-state="connecting"]#state {
-}
-
 [data-state="enabled"]#state {
   background-color: #321c64;
-  color: white;
-}
-
-[data-state="enabled"] .enabled-circle {
-  width: 80px;
-  height: 80px;
-  box-shadow: 0px 0px 1px #00c8d7;
-  left: 120px;
-  top: 60px;
-  border-radius: 100%;
-  position: absolute;
-  animation: circle-effect;
-  animation-iteration-count: infinite;
-  animation-duration: 4s;
-  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  color: #fff;
 }
 
 /* Content Styles */
@@ -302,11 +290,16 @@ a:active {
 }
 
 .takeover__close-button {
-  background: var(--button-background) url("./images/close.svg") 50% / 16px
+  background:
+    var(--button-background) url("./images/close.svg") 50% / 16px
     no-repeat;
   background-size: 12px 12px;
   top: var(--grid-padding);
   right: var(--grid-padding);
+}
+
+.takeover__close-button:hover {
+  --button-background: var(--grey-20);
 }
 
 .takeover {
@@ -364,22 +357,23 @@ a:active {
   margin: 0 0 16px;
 }
 
+/* stylelint-disable no-descending-specificity */
 .takeover h2 {
   font-weight: 500;
   font-size: 20px;
   margin: 24px 0 12px;
 }
+/* stylelint-enable */
 
 @keyframes fade {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0.5;
   }
 }
-
-
 
 button {
   -moz-appearance: none;
@@ -419,12 +413,25 @@ button.primary:enabled:hover:active {
 }
 
 .message {
-  margin: 0 0 var(--grid-padding);
-  padding: var(--grid-padding);
   border-radius: 4px;
   margin: 0 var(--grid-padding) var(--grid-padding);
+  padding: var(--grid-padding);
   padding-inline-start: 32px;
   position: relative;
+  display: flex;
+}
+
+.message:not(.message--warning) .dismiss {
+  flex: 0 0 24px;
+  height: 24px;
+  display: block;
+  border-radius: 3px;
+  background: url("./images/close.svg") no-repeat 50% / 16px;
+  background-size: 12px 12px;
+}
+
+.message:not(.message--warning) .dismiss:hover {
+  background-color: var(--grey-30);
 }
 
 .message::before {
@@ -442,7 +449,7 @@ button.primary:enabled:hover:active {
 }
 
 .message--info {
-  background-color: var(--grey-20)
+  background-color: var(--grey-20);
 }
 
 .message--good {
@@ -461,16 +468,15 @@ button.primary:enabled:hover:active {
   background: url("./images/i-good16.svg");
 }
 
-
-
+/* I kind of don't think these are necessary anymore */
 #content .sub {
   font-weight: normal;
   color: var(--grey-90-a60);
   line-height: 17px;
   font-size: 13px;
-  margin: 0px;
-  margin-block-start: 0px;
-  margin-block-end: 0px;
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 #content .subMain {
@@ -478,6 +484,8 @@ button.primary:enabled:hover:active {
   margin-inline-start: var(--grid-padding);
   margin-inline-end: var(--grid-padding);
 }
+
+/* end */
 
 #onboardingCloseButton {
   margin: 0;
@@ -501,8 +509,8 @@ button.primary:enabled:hover:active {
   text-decoration: none;
   padding-block-start: 13px;
   padding-block-end: 13px;
-  padding-inline-start: var(--grid-padding);
-  padding-inline-end: var(--grid-padding);
+  padding-inline-start: calc(2 * var(--grid-padding));
+  padding-inline-end: calc(2 * var(--grid-padding));
   list-style: none;
 }
 
@@ -518,7 +526,7 @@ button.primary:enabled:hover:active {
 }
 
 .settingsMenu .sub {
-  padding-block-start: 0px;
+  padding-block-start: 0;
 }
 
 .settingsMenu .toggleSettings {
@@ -534,11 +542,6 @@ button.primary:enabled:hover:active {
   align-self: center;
   block-size: 32px;
   inline-size: 32px;
-}
-
-.settingsMenu .manage {
-  /* padding-block-start: 6px;
-  padding-block-end: 8px; */
 }
 
 .settingsMenu #manageAccount {
@@ -586,8 +589,8 @@ button.primary:enabled:hover:active {
 
 footer {
   font-size: var(--footer-font-size);
-  padding-inline-start: var(--grid-padding);
-  padding-inline-end: var(--grid-padding);
+  padding-inline-start: calc(2 * var(--grid-padding));
+  padding-inline-end: calc(2 * var(--grid-padding));
   padding-block-start: 14px;
   padding-block-end: 14px;
   border-block-start: 1px solid #e4e4e4;
@@ -631,22 +634,4 @@ footer {
 
 .link {
   cursor: pointer;
-}
-
-/* TK */
-
-.type {
-  color: white;
-  background: #321c64;
-  border-radius: 4px;
-  padding: 0 8px;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 11px;
-  line-height: 18px;
-  /* identical to box height, or 164% */
-  text-align: center;
-  text-transform: uppercase;
-  margin: 0 0 0 8px;
 }

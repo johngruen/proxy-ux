@@ -10,9 +10,11 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "stylelint": "^13.3.3"
   },
   "scripts": {
+    "lint:css": "stylelint ./public/*.css",
     "start": "node ./index.js",
     "dev": "nodemon ./index.js",
     "ui": "browser-sync start --proxy='localhost:8000' --files='**/*.css, **/*.pug, **/*.js' --ignore=node_modules --port=6006 --no-open --serveStatic='public'"
